@@ -1,0 +1,64 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+bool get_keyword(string input)
+{
+	string arr[32]={"auto","double","int","struct","break","else","long","switch","case","unsigned","short","float","const","volatile","sizeof","while","goto",		
+			"default","static","if","void","union","typedef","do","signed","for","enum","continue","return","extern","register","char"};
+	for(int i=0;i<32;i++)
+	{
+		if(arr[i]==input)
+		return true;
+	}
+	return false;
+}
+bool check_identifier(string input)
+{
+	int ascii_a=int('a');
+	int ascii_z=int('z');
+	int ascii_A=int('A');
+	int ascii_Z=int('Z');
+	int ascii__=int('_');
+	int ascii_0=int('0');
+	int ascii_9=int('9');
+	for(int i=0;i<input.length();i++)
+	{
+		if(i==0)
+		{
+			if(((int(input[0])>=ascii_A) && (int(input[0])<=ascii_Z)) || ((int(input[0])>=ascii_a) && (int(input[0])<=ascii_z)) || (int(input[0]))==ascii__ )
+			{
+				continue;
+			}
+			else
+			return false;
+		}
+		if(((int(input[0])>=ascii_A) && (int(input[0])<=ascii_Z)) || ((int(input[0])>=ascii_a) && (int(input[0])<=ascii_z)) || (int(input[0]))==ascii__ || ((int(input[0])>=ascii_0) && (int(input[0])<=ascii_9)) )
+		continue;
+		else
+		return false;
+	}
+	return true;
+	
+}
+int main()
+{
+	string input;
+	while(true)
+	{
+		getline(cin,input);
+		if(check_identifier(input))
+		{
+			if(get_keyword(input))
+			{
+				cout<<"It is keyword!"<<endl;
+				continue;
+			}
+			cout<<"It is identifier!"<<endl;
+		}
+		else
+		{
+			cout<<"It is not identifier"<<endl;
+		}
+ 	}
+}
